@@ -1,0 +1,159 @@
+class Tamagochi{
+    private int energy;
+    private int energyMax;
+    private int hungry;
+    private int hungryMax;
+    private int clean;
+    private int cleanMax;
+    private int diamonds = 0;
+    private int age = 0;
+    private boolean alive;
+
+    Tamagochi(int energyMax, int hungryMax, int cleanMax){
+        this.energy = energyMax;
+        this.energyMax = energyMax;
+        this.hungry = hungryMax;
+        this.hungryMax = hungryMax;
+        this.clean = cleanMax;
+        this.cleanMax = cleanMax;
+        this.alive = true;
+    }
+
+    private void setEnergy(int value){
+        energy = value;
+        if(energy <= 0){
+            energy = 0;
+            System.out.println("Seu pet morreu sem energia, meus pêsames.");
+            this.alive = false;
+        }
+        if(energy > energyMax)
+            energy = energyMax;
+    }
+
+    private int getEnergy(){
+        return energy;
+    }
+
+    private void setHungry(int value){
+        hungry = value;
+        if(hungry <= 0){
+            hungry = 0;
+            System.out.println("Seu pet morreu por passar fome, meus pêsames.");
+            this.alive = false;
+        }
+        if(hungry > hungryMax)
+            hungry = hungryMax;
+    }
+
+    private int getHungry(){
+        return hungry;
+    }
+
+    private void setClean(int value){
+        clean = value;
+        if(clean <= 0){
+            clean = 0;
+            System.out.println("Seu pet morreu por estar muito sujo, meus pêsames.");
+            this.alive = false;
+        }
+        if(clean > cleanMax)
+            clean = cleanMax;
+    }
+
+    private int getClean(){
+        return clean;
+    }
+
+    //private void setDiamonds(int value){
+        //diamonds = value;
+        //System.out.println("Seu pet tem " + diamonds + " diamantes!");
+    //}
+
+    //private int getDiamonds(){
+        //return diamonds;
+    //}
+
+    //private void setAge(int value){
+        //age = value;
+        //System.out.println("Seu pet ficou mais velho, agora ele tem " + age +" ano/anos de idade!");
+    //}
+
+    //private int getAge(){
+        //return age;
+    //}
+
+    boolean deathtest(){
+        if(this.alive)
+            return false;
+            System.out.println("Voce não pode brincar, pois infelizmente seu pet está morto.");
+        return true;
+    }
+
+    public void play(){
+        if(deathtest())
+            return;
+        System.out.println("Seu pet está brincando!");
+        this.setEnergy(this.getEnergy() - 2);
+        this.setHungry(this.getHungry() - 2);
+        this.setClean(this.getClean() - 2);
+        this.diamonds += 2;
+        this.age += 1;
+    }
+
+    public void shower(){
+        if(deathtest())
+            return;
+        System.out.println("Seu pet está tomando banho!");
+        this.setEnergy(this.getEnergy() - 2);
+        this.setHungry(this.getHungry() - 2);
+        this.setClean(this.getClean() + 4);
+        this.diamonds += 2;
+        this.age += 1;
+    }
+
+    public void eat(){
+        if(deathtest())
+            return;
+        System.out.println("Seu pet está comendo!");
+        this.setEnergy(this.getEnergy() - 2);
+        this.setHungry(this.getHungry() + 4);
+        this.setClean(this.getClean() - 2);
+        this.diamonds += 2;
+        this.age += 1;
+    }
+
+    public void sleep(){
+        if(deathtest())
+            return;
+        System.out.println("Seu pet está dormindo!");
+        this.setEnergy(this.getEnergy() + 4);
+        this.setHungry(this.getHungry() - 2);
+        this.setClean(this.getClean() - 2);
+        this.diamonds += 2;
+        this.age += 1;
+    }
+
+    public boolean isAlive(){
+        return this.alive;
+    }
+
+    public String toString() {
+        return "Energia: " + energy + "/" + energyMax +" | Saciedade: " + hungry + "/" + hungryMax + " | Limpeza: " + clean + "/" + cleanMax + " | Idade: " + age + " | Diamantes: " + diamonds;
+    }
+}
+
+public class Pet{
+    public static void main(String[] args){
+        Tamagochi tamagochi = new Tamagochi(30, 30, 30);
+
+        System.out.println(tamagochi);
+        tamagochi.play();
+        System.out.println(tamagochi);
+        tamagochi.shower();
+        System.out.println(tamagochi);
+        tamagochi.eat();
+        System.out.println(tamagochi);
+        tamagochi.sleep();
+        System.out.println(tamagochi);
+    }
+}
